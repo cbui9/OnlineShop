@@ -1,0 +1,19 @@
+diff a/OnlineShop.Data/Repositories/ProductCategoryRepository.cs b/OnlineShop.Data/Repositories/ProductCategoryRepository.cs	(rejected hunks)
+@@ -15,12 +15,14 @@
+ 
+     public class ProductCategoryRepository : RepositoryBase<ProductCategory>, IProductCategoryRepository
+     {
+-        public ProductCategoryRepository(IDbFactory dbFactory): base(dbFactory)
++        public ProductCategoryRepository(IDbFactory dbFactory)
++            : base(dbFactory)
+         {
+         }
++
+         public IEnumerable<ProductCategory> GetByAlias(string alias)
+         {
+             return this.DbContext.ProductCategories.Where(x => x.Alias == alias);
+         }
+     }
+-}
+\ No newline at end of file
++}
