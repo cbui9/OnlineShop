@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineShop.Data.Infrastructure
+﻿namespace OnlineShop.Data.Infrastructure
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -15,10 +9,12 @@ namespace OnlineShop.Data.Infrastructure
         {
             this.dbFactory = dbFactory;
         }
+
         public OnlineShopDbContext DbContext
         {
             get { return dbContext ?? (dbContext = dbFactory.Init()); }
         }
+
         public void Commit()
         {
             dbContext.SaveChanges();

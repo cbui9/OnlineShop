@@ -1,16 +1,11 @@
 ﻿using OnlineShop.Model.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineShop.Data
 {
     public class OnlineShopDbContext : DbContext
     {
-        public OnlineShopDbContext():base("OnlineShopConnection")
+        public OnlineShopDbContext() : base("OnlineShopConnection")
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
@@ -31,15 +26,14 @@ namespace OnlineShop.Data
         public DbSet<Slide> Slides { set; get; }
         public DbSet<SupportOnline> SupportOnlines { set; get; }
         public DbSet<SystemConfig> SystemConfigs { set; get; }
+        public DbSet<Error> Errors { set; get; }
 
         public DbSet<Tag> Tags { set; get; }
 
         public DbSet<VisitorStatistic> VisitorStatistics { set; get; }
 
-
         protected override void OnModelCreating(DbModelBuilder builder)
         {
-
         }
     }
 }

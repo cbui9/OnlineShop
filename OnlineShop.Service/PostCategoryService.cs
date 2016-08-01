@@ -1,33 +1,38 @@
 ﻿using OnlineShop.Data.Infrastructure;
 using OnlineShop.Data.Repositories;
 using OnlineShop.Model.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineShop.Service
 {
     public interface IPostCategoryService
     {
         PostCategory Add(PostCategory postCategory);
+
         void Update(PostCategory postCategory);
+
         PostCategory Delete(int id);
+
         IEnumerable<PostCategory> GetAll();
+
         IEnumerable<PostCategory> GetAllByParentId(int parentId);
+
         PostCategory GetById(int id);
+
         void SaveChanges();
     }
+
     public class PostCategoryService : IPostCategoryService
     {
-        IPostCategoryRepository _postCategoryRepository;
-        IUnitOfWork _unitOfWork;
+        private IPostCategoryRepository _postCategoryRepository;
+        private IUnitOfWork _unitOfWork;
+
         public PostCategoryService(IPostCategoryRepository postCategoryRepository, IUnitOfWork unitOfWork)
         {
             this._postCategoryRepository = postCategoryRepository;
             this._unitOfWork = unitOfWork;
         }
+
         public PostCategory Add(PostCategory postCategory)
         {
             return _postCategoryRepository.Add(postCategory);
@@ -60,7 +65,7 @@ namespace OnlineShop.Service
 
         public void Update(PostCategory postCategory)
         {
-             _postCategoryRepository.Update(postCategory);
+            _postCategoryRepository.Update(postCategory);
         }
     }
 }

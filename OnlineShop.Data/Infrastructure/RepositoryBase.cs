@@ -8,7 +8,6 @@ namespace OnlineShop.Data.Infrastructure
 {
     public abstract class RepositoryBase<T> : IRepository<T> where T : class
     {
-
         #region Properties
 
         private OnlineShopDbContext dataContext;

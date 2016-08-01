@@ -1,10 +1,7 @@
 ﻿using OnlineShop.Data.Infrastructure;
 using OnlineShop.Model.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineShop.Data.Repositories
 {
@@ -28,7 +25,7 @@ namespace OnlineShop.Data.Repositories
                         orderby p.CreatedDate descending
                         select p;
             totalRow = query.Count();
-            query = query.Skip((pageIndex-1)*pageSize).Take(pageSize);
+            query = query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             return query;
         }
     }
