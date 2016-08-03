@@ -5,15 +5,22 @@
 
 <!DOCTYPE html>
 
-<html ng-app>
+<html ng-app="myModule">
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
     <script src="~/Scripts/plugins/angular/angular.js"></script>
+    <script src="~/Scripts/spa/app.js"></script>
 </head>
 <body>
-    <div> 
-       1 + 1 = {{1+1}}
+    <div ng-controller="schoolController">
+        {{message}}
+        <div ng-controller="studentController">
+            {{message}}
+        </div>
+        <div ng-controller="teacherController">
+            {{message}}
+        </div>
     </div>
 </body>
 </html>
