@@ -2,19 +2,20 @@
 var myapp = angular.module('myModule', []);
 
 myapp.controller('schoolController', schoolController);
-myapp.service('Validator', Validator);
+myapp.service('validatorService', validatorService);
+myapp.directive('teduShopDirective', teduShopDirective);
 
-schoolController.$inject['$scope', 'Validator'];
+schoolController.$inject['$scope', 'validatorService'];
 
 //declare
-function schoolController($scope, Validator){
+function schoolController($scope, validatorService) {
     $scope.num = 1;
     $scope.checkNumber = function () {
-        $scope.message = Validator.checkNumber($scope.num);
+        $scope.message = validatorService.checkNumber($scope.num);
     }
 }
 
-function Validator() {
+function validatorService() {
 
     return {
         checkNumber: checkNumber
@@ -28,3 +29,9 @@ function Validator() {
     }
 }
 
+function teduShopDirective() {
+    return {
+        restrict: "A",
+        templateUrl: "/Scripts/spa/teduShopDirective.html"
+    }
+}
