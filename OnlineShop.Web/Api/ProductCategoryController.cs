@@ -24,12 +24,12 @@ namespace OnlineShop.Web.Api
         }
 
         [Route("getall")]
-        public HttpResponseMessage GetAll(HttpRequestMessage request, int page, int pageSize)
+        public HttpResponseMessage GetAll(HttpRequestMessage request,string keyword, int page, int pageSize)
         {
             return CreateHttpResponse(request, () =>
             {
                 int totalItem = 0;
-                var model = _productCategoryService.GetAll();
+                var model = _productCategoryService.GetAll(keyword);
                 totalItem = model.Count();
                 var query = model.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
                 var responeData = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(query);
