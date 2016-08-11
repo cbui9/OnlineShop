@@ -15,21 +15,32 @@ namespace OnlineShop.Web.Api
     [RoutePrefix("api/productcategory")]
     public class ProductCategoryController : ApiControllerBase
     {
-        IProductCategoryService _productCategoryService;
+        private IProductCategoryService _productCategoryService;
+
         public ProductCategoryController(IErrorService errorService, IProductCategoryService productCategoryService)
-            :base(errorService)
+            : base(errorService)
         {
             this._productCategoryService = productCategoryService;
         }
 
         [Route("getall")]
-        public HttpResponseMessage GetAll(HttpRequestMessage request)
+        public HttpResponseMessage GetAll(HttpRequestMessage request, int page, int pageSize)
         {
-            return CreateHttpResponse(request, () => 
+            return CreateHttpResponse(request, () =>
             {
+                int totalItem = 0;
                 var model = _productCategoryService.GetAll();
-                var responeData = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(model);
-                var response = request.CreateResponse(HttpStatusCode.OK, responeData);
+                totalItem = model.Count();
+                var query = model.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+                var responeData = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(query);
+                var paginationSet = new PaginationSet<ProductCategoryViewModel>()
+                {
+                    Items = responeData,
+                    Page = page,
+                    TotalCount = totalItem,
+                    TotalPages = (int)Math.Ceiling((decimal)totalItem / pageSize)
+                };
+                var response = request.CreateResponse(HttpStatusCode.OK, paginationSet);
                 return response;
             });
         }
