@@ -1,13 +1,11 @@
 ﻿ <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1 style="height:30px;">
-        
-    </h1>
+    <h1 style="height:30px;"></h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
         <li><a href="#">Sản phẩm</a></li>
         <li><a ui-sref="product_categories">Danh mục </a></li>
-        <li class="active">Thêm mới</li>
+        <li class="active">Cập nhật</li>
     </ol>
 </section>
 <!-- Main content -->
@@ -15,16 +13,16 @@
     <!-- Default box -->
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Thêm mới danh mục</h3>
+            <h3 class="box-title">Cập nhật danh mục</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" novalidate name="frmAddProductCategory" role="form" ng-submit="AddProductCategory()">
+        <form class="form-horizontal" novalidate name="frmUpdateProductCategory" role="form" ng-submit="UpdateProductCategory()">
             <div class="box-body">
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Tên danh mục</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="name" ng-change="GetSeoTitle()" ng-model="productCategory.Name">
+                        <input type="text" class="form-control" ng-change="GetSeoTitle()" name="name" ng-model="productCategory.Name">
                     </div>
                 </div>
 
@@ -48,7 +46,7 @@
                         <select name="parentID" class="form-control" ng-model="productCategory.ParentID" ng-options="option.ID as option.Name for option in parentCategories">
                             <option value="">Danh mục</option>
                         </select>
-                        <input type="hidden"ng-model="productCategory.ParentID" />
+                        <input type="hidden" ng-model="productCategory.ParentID" />
                     </div>
                 </div>
 
