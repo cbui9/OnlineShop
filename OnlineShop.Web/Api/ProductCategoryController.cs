@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using OnlineShop.Web.Infrastructure.Extensions;
+using System.Web.Script.Serialization;
 
 namespace OnlineShop.Web.Api
 {
@@ -133,6 +134,38 @@ namespace OnlineShop.Web.Api
             });
         }
 
+        [Route("delete")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public HttpResponseMessage Delete(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var oldProductCategory = _productCategoryService.Delete(id);
+                _productCategoryService.SaveChanges();
+                var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(oldProductCategory);
+                var response = request.CreateResponse(HttpStatusCode.OK, responseData);
+                return response;
+            });
+        }
+
+        [Route("deletemulti")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProductCategories)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var listProductCategory = new JavaScriptSerializer().Deserialize<List<int>>(checkedProductCategories);
+                foreach (var item in listProductCategory)
+                {
+                    var oldProductCategory = _productCategoryService.Delete(item);
+                }
+                _productCategoryService.SaveChanges();
+                var response = request.CreateResponse(HttpStatusCode.OK, listProductCategory.Count);
+                return response;
+            });
+        }
 
     }
 }

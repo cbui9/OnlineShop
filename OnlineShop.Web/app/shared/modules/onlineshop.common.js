@@ -1,3 +1,3 @@
 ﻿(function () {
-    angular.module('onlineshop.common', ['ui.router'])
+    angular.module('onlineshop.common', ['ui.router', 'ngBootbox'])
 })();
