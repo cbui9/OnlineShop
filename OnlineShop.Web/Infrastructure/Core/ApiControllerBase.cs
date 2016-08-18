@@ -19,7 +19,6 @@ namespace OnlineShop.Web.Infrastructure.Core
         {
             this._errorService = errorService;
         }
-
         protected HttpResponseMessage CreateHttpResponse(HttpRequestMessage requestMessage, Func<HttpResponseMessage> function)
         {
             HttpResponseMessage response = null;
@@ -64,7 +63,7 @@ namespace OnlineShop.Web.Infrastructure.Core
                 _errorService.Create(error);
                 _errorService.SaveChanges();
             }
-            catch (Exception)
+            catch
             {
             }
         }
